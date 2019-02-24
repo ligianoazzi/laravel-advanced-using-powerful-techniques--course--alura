@@ -26,6 +26,11 @@
 	</div>
 
 	<div class="form-group">
+		<label> Size </label>
+		<input name="tamanho" class="form-control">
+	</div>	
+
+	<div class="form-group">
 		<label> Description </label>
 		<input name="descricao" class="form-control">
 	</div>
