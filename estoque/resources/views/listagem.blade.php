@@ -28,9 +28,14 @@
 				<td> {{ $p->quantidade }} </td>
 				<td>
 					<a href="/produtos/mostra/<?= $p->id ?>">
-						<span class="glyphicon glyphicon-search" aria-hidden="true">details</span>
+						<span class="glyphicon glyphicon-search" aria-hidden="true">Details</span>
 					</a>
 				</td>
+				<td>
+					<a href="/produtos/remove/<?= $p->id ?>">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true">Delete</span>
+					</a>
+				</td>				
 			</tr>			
 	@endforeach
 

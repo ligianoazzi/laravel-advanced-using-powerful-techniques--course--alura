@@ -34,34 +34,40 @@ class ProdutoController extends Controller
 
     }
 
+    public function remove($id){
+		$produto = Produto::find($id);
+		$produto->delete();
+   	 	return redirect()->action('ProdutoController@lista');
+    }
+
     public function novo(){
     	return view('formulario');
     }
 
 	public function adiciona(){
 
-		/*$nome = Request::input('nome');
-		$quantidade = Request::input('quantidade');
-		$valor = Request::input('valor');
-		$descricao = Request::input('descricao');*/
+		$params = Request::all();
+		$produto = new Produto($params);
+		$produto->save();
 
-		// $table = 'nome_of_the_table';
 
-		$produto = new Produto();
-		$produto->nome = Request::input('nome');
-		$produto->quantidade = Request::input('quantidade');
-		$produto->valor = Request::input('valor');
-		$produto->descricao = Request::input('descricao');
+		/*
+		it is possible to use also:
+		Produto::create(Request::all());
 
-		$produto->timestamps = false; // in the others versions of Laravel, can be different
+		instead:
+		$params = Request::all();
+		$produto = new Produto($params);
+		$produto->save();
+		*/
 
+
+		return redirect('/produtos')->withInput();
 
 		try {
 
-			//DB::insert('insert into produtos (nome, quantidade, valor, descricao) values (?, ?, ?, ?)', array($nome, $quantidade, $valor, $descricao));
 			$produto->save();			
 
-			//return redirect('/produtos')->withInput(Request::only('nome'));
 			return redirect()
 			->action('ProdutoController@lista')
 			->withInput(Request::only('nome'));
