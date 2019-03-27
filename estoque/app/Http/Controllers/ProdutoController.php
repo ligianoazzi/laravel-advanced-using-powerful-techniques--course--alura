@@ -5,6 +5,9 @@ namespace estoque\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Request;
 use estoque\Produto; // calling for the model
+use validator;
+use estoque\Http\Requests\ProdutoRequest;
+
 
 
 
@@ -44,9 +47,11 @@ class ProdutoController extends Controller
     	return view('formulario');
     }
 
-	public function adiciona(){
+	public function adiciona(ProdutoRequest $request){
 
-		$params = Request::all();
+
+
+		$params = $request->all();
 		$produto = new Produto($params);
 		$produto->save();
 

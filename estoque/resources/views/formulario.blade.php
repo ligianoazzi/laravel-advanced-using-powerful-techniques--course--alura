@@ -2,6 +2,21 @@
 
 @section('conteudo')
 
+<?php if ($errors->all()) { ?>
+<div class="alert alert-danger">
+<ul>
+		@foreach($errors->all() as $error )
+	<li>
+
+			{{$error}}
+
+	</li>
+		@endforeach
+</ul>	
+
+</div>
+<?php } ?>
+
 <div>
 	<h1>Insert form</h1>
 </div>
