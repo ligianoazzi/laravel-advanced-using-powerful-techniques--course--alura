@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
 });
 
@@ -23,14 +23,14 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/produtos', 'ProdutoController@lista');
+Route::get('/', 'ProdutoController@lista')->middleware('auth');
 
-Route::get('/produtos/mostra/{id}', 'ProdutoController@mostra')->where('id', '[0-9]+');// if i don't put where clausule, can I have reoutes trouble
+Route::get('/produtos/mostra/{id}', 'ProdutoController@mostra')->where('id', '[0-9]+')->middleware('auth');// if i don't put where clausule, can I have reoutes trouble
 
-Route::get('/produtos/remove/{id}', 'ProdutoController@remove')->where('id', '[0-9]+');
+Route::get('/produtos/remove/{id}', 'ProdutoController@remove')->where('id', '[0-9]+')->middleware('auth');
 
-Route::get('produtos/novo', 'ProdutoController@novo');
+Route::get('produtos/novo', 'ProdutoController@novo')->middleware('auth');
 
-Route::post('produtos/adiciona', 'ProdutoController@adiciona');
+Route::post('produtos/adiciona', 'ProdutoController@adiciona')->middleware('auth');
 
-Route::get('produtos/getjson', 'ProdutoController@getJson'); 
+Route::get('produtos/getjson', 'ProdutoController@getJson')->middleware('auth'); 
