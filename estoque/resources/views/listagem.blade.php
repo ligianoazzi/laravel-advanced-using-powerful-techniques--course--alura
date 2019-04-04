@@ -16,6 +16,7 @@
 				<th>Name</th>
 				<th>Value</th>
 				<th>Description</th>
+				<th>Category</th>
 				<th>Quantity</th>
 			</tr>
 
@@ -25,6 +26,7 @@
 				<td> {{ $p->nome }} </td>
 				<td> {{ $p->valor }} </td>
 				<td> {{ $p->descricao }} </td>
+				<td> {{ $p->categoria->nome }} </td>
 				<td> {{ $p->quantidade }} </td>
 				<td>
 					<a href="/produtos/mostra/<?= $p->id ?>">

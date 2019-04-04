@@ -5,6 +5,7 @@ namespace estoque\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Request;
 use estoque\Produto; // calling for the model
+use estoque\Categoria;
 use validator;
 use estoque\Http\Requests\ProdutoRequest;
 
@@ -44,16 +45,27 @@ class ProdutoController extends Controller
     }
 
     public function novo(){
-    	return view('formulario');
+    	return view('formulario')->with('categorias', Categoria::all());
     }
 
 	public function adiciona(ProdutoRequest $request){
 
 
+		try {
 
-		$params = $request->all();
-		$produto = new Produto($params);
-		$produto->save();
+			$params = $request->all();
+
+			$produto = new Produto($params);
+
+			$produto->save();
+			return redirect('/')->withInput();
+
+
+		}catch (customException $e) {
+		 
+		 	echo $e->errorMessage();
+
+		}
 
 
 		/*
@@ -67,21 +79,7 @@ class ProdutoController extends Controller
 		*/
 
 
-		return redirect('/produtos')->withInput();
 
-		try {
-
-			$produto->save();			
-
-			return redirect()
-			->action('ProdutoController@lista')
-			->withInput(Request::only('nome'));
-
-		}catch (customException $e) {
-		 
-		 	echo $e->errorMessage();
-
-		}
 
 	}
 
